@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
 #
 
 spec.name         = "YouCanPay"
-spec.version      = "0.0.1"
+spec.version      = "0.0.2"
 spec.summary      = "The YCPayment iOS SDK makes it quick and easy to build an excellent payment experience in your iOS app."
 
 # This description is used to generate tags and improve search results.
