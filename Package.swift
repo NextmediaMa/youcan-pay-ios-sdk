@@ -25,7 +25,7 @@ let package = Package(
         .target(
             name: "YouCanPay",
             dependencies: ["Alamofire"],
-            resources: [.process("resources")]),
+            resources: [.copy("resources")]),
         .testTarget(
             name: "YouCanPayTests",
             dependencies: ["YouCanPay"]),
