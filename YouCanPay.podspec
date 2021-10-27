@@ -108,7 +108,7 @@ spec.exclude_files = "Classes/Exclude"
 #
 
 # spec.resource  = "icon.png"
-spec.resources = "resources/*"
+spec.resources = "Sources/YouCanPay/resources/*"
 
 # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
