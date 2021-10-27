@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3D Secure Check</title>
+    <style>
+        .modal-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .modal {
+            position: relative;
+            text-align: center;
+            z-index: 2;
+            max-width: 11rem;
+            width: 100%;
+            padding: 2rem;
+            background: #f9fafe;
+            border-radius: 4px;
+        }
+        .modal-header {
+            width: 4rem;
+            color: #1a1a1a de;
+            margin: 0 auto 1rem;
+        }
+        .modal-heading, .modal-paragraph {
+            margin: 0;
+            margin-bottom: 1rem;
+        }
+        .button {
+            cursor: pointer;
+            border: none;
+            padding: 10px 17px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .primary-button {
+            color: white;
+            background: #aa2e66;
+        }
+        .primary-button:hover, .primary-button:focus {
+            background: #5a1836;
+        }
+        .secondary-button {
+            color: #ec4352;
+            background: transparent;
+        }
+    </style>
+</head>
+
+<body>
+<form method="POST" id="form">
+    <div class="modal-container">
+        <div class="overlay">
+        </div>
+        <div class="modal">
+            <div class="modal-header">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="shield-alt" class="svg-inline--fa fa-shield-alt fa-w-16" role="img" viewBox="0 0 512 512"><path fill="currentColor" d="M466.5 83.7l-192-80a48.15 48.15 0 0 0-36.9 0l-192 80C27.7 91.1 16 108.6 16 128c0 198.5 114.5 335.7 221.5 380.3 11.8 4.9 25.1 4.9 36.9 0C360.1 472.6 496 349.3 496 128c0-19.4-11.7-36.9-29.5-44.3zM256.1 446.3l-.1-381 175.9 73.3c-3.3 151.4-82.1 261.1-175.8 307.7z"/></svg>
+            </div>
+            <div class="modal-body">
+                <h4 class="modal-heading">
+                    Purchase Authorization
+                </h4>
+                <p class="modal-paragraph">
+                    are you sure you want to continue ?
+                </p>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="button primary-button" data-success="1">
+                    Authorize
+                </button>
+                <button type="button" class="button secondary-button" data-success="0">
+                    Decline
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    document.querySelector('.modal-actions').addEventListener('click', function (event) {
+        var baseUrl = "u@%";
+        var succ = event.target.dataset.success;
+        var callbackUrl = "";
+        
+        if (baseUrl.includes("?")) {
+            baseUrl += "&";
+        }
+        else {
+            baseUrl += "?";
+        }
+        
+        if (succ == 1) {
+            callbackUrl = baseUrl + "transaction_id=t@%&order_id=&is_success=1";
+        }
+        else
+        {
+            callbackUrl = baseUrl + "transaction_id=t@%&order_id=&is_success=0&message=3DS+authentication+failed";
+        }
+        
+        form.action = callbackUrl;
+        form.submit();
+    })
+</script>
+</body>
+</html>
