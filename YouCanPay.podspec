@@ -138,4 +138,9 @@ spec.resources = "Sources/YouCanPay/resources/*"
   spec.dependency "Alamofire", '~> 5.0.0'
 # spec.dependency "SwiftyJSON", '~> 4.3.0'
 
+spec.pod_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+  }
+spec.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+
 end
