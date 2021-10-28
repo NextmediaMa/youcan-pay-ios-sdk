@@ -25,7 +25,11 @@ let package = Package(
         .target(
             name: "YouCanPay",
             dependencies: ["Alamofire"],
-            resources: [.process("resources")]),
+            resources: [.process("resources")],
+            swiftSettings: [
+              .define("SPM")
+            ]
+        ),
         .testTarget(
             name: "YouCanPayTests",
             dependencies: ["YouCanPay"]),

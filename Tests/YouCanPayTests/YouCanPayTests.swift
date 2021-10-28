@@ -21,6 +21,12 @@ final class YouCanPayTests: XCTestCase {
         try super.tearDownWithError()
     }
     
+    func testLocale() {
+        let string = YCPLocalizable.get("An error occurred while processing the payment.")
+        
+        XCTAssertEqual(string, "An error occurred while processing the payment.")
+    }
+    
     // testing payment with a none 3DS card -> Succeeded
     func testPayEndpointNone3dsSucceeded() throws {
         // given
