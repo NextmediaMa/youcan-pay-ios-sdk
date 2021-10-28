@@ -11,3 +11,9 @@ class YCPLocalizable {
         return key
     }
 }
+
+#if !SPM
+extension Bundle {
+  static var module:Bundle { Bundle(identifier: "YouCanPay")! }
+}
+#endif
