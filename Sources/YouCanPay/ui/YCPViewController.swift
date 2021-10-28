@@ -51,8 +51,12 @@ class YCPViewController: UIViewController, WKNavigationDelegate {
         self.headerView = UIView(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: 70))
         self.headerView.backgroundColor = .white
         
+        let frameworkBundle = Bundle(for: YCPViewController.self)
+        let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("XDCoreLib.bundle")
+        let resourceBundle = Bundle(url: bundleURL!)
+        
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 70))
-        let image = UIImage(named: "close_btn", in: .module, compatibleWith: nil)
+        let image = UIImage(named: "close_btn", in: resourceBundle, compatibleWith: nil)
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(dismissVC(_:)), for: .touchUpInside)
         
