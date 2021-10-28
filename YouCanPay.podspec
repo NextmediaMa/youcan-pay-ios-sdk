@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
 #
 
 spec.name         = "YouCanPay"
-spec.version      = "0.0.2"
+spec.version      = "0.0.3"
 spec.summary      = "The YCPayment iOS SDK makes it quick and easy to build an excellent payment experience in your iOS app."
 
 # This description is used to generate tags and improve search results.
@@ -68,7 +68,7 @@ spec.platform     = :ios
 # spec.platform     = :ios, "11.0"
 
 #  When using multiple platforms
-spec.ios.deployment_target = "11.0"
+spec.ios.deployment_target = "13.0"
 # spec.osx.deployment_target = "10.7"
 # spec.watchos.deployment_target = "2.0"
 # spec.tvos.deployment_target = "9.0"
@@ -94,7 +94,7 @@ spec.source       = { :git => "https://github.com/NextmediaMa/youcan-pay-ios-sdk
 #
 
 spec.source_files  = "Sources/YouCanPay/**/*.swift"
-spec.exclude_files = "Classes/Exclude"
+#   spec.exclude_files = "Classes/Exclude"
 
 # spec.public_header_files = "Classes/**/*.h"
 
@@ -108,7 +108,7 @@ spec.exclude_files = "Classes/Exclude"
 #
 
 # spec.resource  = "icon.png"
-spec.resources = "Sources/YouCanPay/resources/*"
+# spec.resources = "Sources/YouCanPay/resources/*"
 
 # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
