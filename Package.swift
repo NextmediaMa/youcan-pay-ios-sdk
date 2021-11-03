@@ -25,7 +25,6 @@ let package = Package(
         .target(
             name: "YouCanPay",
             dependencies: ["Alamofire"],
-            path: "Sources",
             resources: [.process("resources")]
         ),
         .testTarget(

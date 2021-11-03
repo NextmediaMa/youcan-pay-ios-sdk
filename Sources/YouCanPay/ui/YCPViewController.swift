@@ -8,6 +8,7 @@ class YCPViewController: UIViewController, WKNavigationDelegate {
     
     var response: YCPResponse3ds
     var headerView: UIView!
+    var callbackUrlInvoked = false
     let ycpWebview = YCPWebview()
     let onSuccess: (String) -> Void
     let onFailure: (String) -> Void
@@ -95,6 +96,7 @@ class YCPViewController: UIViewController, WKNavigationDelegate {
                 } else {
                     self.onFailure(callbackResult.message)
                 }
+                self.callbackUrlInvoked = true
                 self.dismiss(animated: true, completion: nil)
                 decisionHandler(.cancel)
                 
@@ -103,6 +105,12 @@ class YCPViewController: UIViewController, WKNavigationDelegate {
         }
         
         decisionHandler(.allow)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if !self.callbackUrlInvoked {
+            self.onFailure(YCPLocalizable.get("Payment canceled"))
+        }
     }
 }
 
@@ -113,11 +121,5 @@ extension YCPViewController: UIScrollViewDelegate {
     
     func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
         scrollView.pinchGestureRecognizer?.isEnabled = false
-    }
-}
-
-extension YCPViewController: UIAdaptivePresentationControllerDelegate {
-    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        onFailure("Payment canceled")
     }
 }
