@@ -82,7 +82,6 @@ class YCPViewController: UIViewController, WKNavigationDelegate {
     /// call to action for dismiss
     @objc func dismissVC(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
-        self.onFailure(YCPLocalizable.get("Payment canceled"))
     }
     
     /// delegate to catch urls
