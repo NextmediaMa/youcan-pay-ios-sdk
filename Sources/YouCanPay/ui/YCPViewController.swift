@@ -115,3 +115,9 @@ extension YCPViewController: UIScrollViewDelegate {
         scrollView.pinchGestureRecognizer?.isEnabled = false
     }
 }
+
+extension YCPViewController: UIAdaptivePresentationControllerDelegate {
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        onFailure("Payment canceled")
+    }
+}
