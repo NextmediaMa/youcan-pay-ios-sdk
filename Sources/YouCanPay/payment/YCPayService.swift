@@ -52,8 +52,8 @@ class YCPayService {
                         return
                     }
                     
-                    //Response when 3DS is disabled
-                    if response is YCPResponseSale {
+                    //Response when 3DS is disabled && success is true
+                    if response is YCPResponseSale && (response as! YCPResponseSale).success {
                         onSuccess((response as! YCPResponseSale).transactionId)
                         
                         return

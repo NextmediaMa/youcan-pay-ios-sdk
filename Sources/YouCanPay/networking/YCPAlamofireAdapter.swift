@@ -1,7 +1,7 @@
 import Foundation
 import Alamofire
 
-public class YCPAlamofireAdapter: YCPHttpAdapter {    
+class YCPAlamofireAdapter: YCPHttpAdapter {    
     func request(_ method: String,
                  _ endpoint: String,
                  _ params: [String : Any],
