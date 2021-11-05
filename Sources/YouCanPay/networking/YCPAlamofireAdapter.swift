@@ -10,7 +10,7 @@ class YCPAlamofireAdapter: YCPHttpAdapter {
     {
         var header: HTTPHeaders = [
             "Accept": "application/json",
-            "X-Preferred-Locale": "\(YCPConfigs.CURRENT_LOCALE)",
+            "X-Preferred-Locale": "\(YCPLocalizable.getCurrentLocale())",
         ]
         
         if let parameters = headers {

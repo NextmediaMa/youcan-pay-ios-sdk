@@ -3,19 +3,19 @@ import Foundation
 class YCPCardValidation {
     class func validate(_ cardInfo: YCPCardInformation) throws {
         if !isValidCardName(cardInfo.cardHolderName) {
-            throw NSError(domain: "Cardholder name is required", code:-1, userInfo:nil)
+            throw YCPInvalidArgumentException(message: "Cardholder name is required")
         }
         
         if !isValidCardNumber(cardInfo.cardNumber) {
-            throw NSError(domain: "Invalid card number", code:-1, userInfo:nil)
+            throw YCPInvalidArgumentException(message: "Invalid card number")
         }
         
         if !isValidDate(cardInfo.expiryDate) {
-            throw NSError(domain: "Invalid date", code:-1, userInfo:nil)
+            throw YCPInvalidArgumentException(message: "Invalid date")
         }
         
         if !isValidCvv(cardInfo.cvv) {
-            throw NSError(domain: "Invalid cvv", code:-1, userInfo:nil)
+            throw YCPInvalidArgumentException(message: "Invalid cvv")
         }
     }
     
@@ -23,6 +23,7 @@ class YCPCardValidation {
         if cardholderName.isEmpty {
             return false
         }
+        
         return true
     }
     
@@ -61,7 +62,7 @@ class YCPCardValidation {
     }
 }
 
-extension String  {
+extension String {
     var isNumber: Bool {
         return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
     }

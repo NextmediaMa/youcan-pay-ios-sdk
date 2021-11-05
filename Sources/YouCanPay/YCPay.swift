@@ -12,7 +12,7 @@ public class YCPay {
     // Consutructor to initialize YCPay
     public init(pubKey: String, locale: String = "en") {
         self.pubKey = pubKey
-        YCPConfigs.CURRENT_LOCALE = locale
+        YCPLocalizable.setCurrentLocale(locale: locale)
         ycpayService = YCPayService(httpAdapter: YCPAlamofireAdapter())
     }
    

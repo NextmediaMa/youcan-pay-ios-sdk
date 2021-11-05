@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     
     // start the payment
     func pay() {
-        do{
+        do {
             // set your card information
             cardInfo = YCPCardInformation(cardHolderName: "NAME", cardNumber: "XXXXXXXXXXXXXXXX", expiryDate: "XX/XX", cvv: "XXX")
             
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
                                 self,
                                 successCallback,
                                 errorCallback)
-        }catch{
+        } catch {
             print("error: \(error)")
         }
     }

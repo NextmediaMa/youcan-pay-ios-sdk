@@ -9,7 +9,4 @@ class YCPConfigs: NSObject {
     
     // pay url for sandbox mode
     static public let PAY_SANDBOX_URL: String = BASE_URL + "/sandbox/api/pay"
-    
-    //current locale
-    static public var CURRENT_LOCALE: String = "en"
 }

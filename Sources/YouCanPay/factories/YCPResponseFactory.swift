@@ -24,6 +24,6 @@ class YCPResponseFactory {
             return response
         }
         
-        throw NSError(domain: "Error occurred while decoding data", code:-1, userInfo:nil)
+        throw YCPInvalidJsonException()
     }
 }
