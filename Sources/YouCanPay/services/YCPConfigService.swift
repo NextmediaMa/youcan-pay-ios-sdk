@@ -23,19 +23,19 @@ class YCPConfigService {
         DispatchQueue.main.async(execute: { () -> Void in
             
             self.ycpHttpAdapter.get(url, [:], nil, { (ycpResponse) in
-                if ycpResponse.getStatusCode() != 200 {
-                    onFailure(YCPLocalizable.get("An error occurred"))
-                    
-                    return
-                }
-                
                 if !ycpResponse.isSuccess() {
-                    onFailure(ycpResponse.getResponse() ?? YCPLocalizable.get("An error occurred"))
+                    onFailure(ycpResponse.getResponse() ?? YCPLocalizable.get("An error occurred : request failed"))
                     
                     return
                 }
                 
                 if ycpResponse.getResponse() == nil {
+                    onFailure(YCPLocalizable.get("An error occurred : response is null"))
+                    
+                    return
+                }
+                
+                if ycpResponse.getStatusCode() != 200 {
                     onFailure(YCPLocalizable.get("An error occurred"))
                     
                     return
