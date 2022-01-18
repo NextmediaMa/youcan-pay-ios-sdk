@@ -1,6 +1,6 @@
 import Foundation
 
-class Observable<T: Equatable> {
+public class Observable<T: Equatable> {
     private let thread : DispatchQueue
     var observe : ((T) -> ())?
     var property : T? {

@@ -10,7 +10,7 @@ public class YCPay {
     private var ycpayService: YCPayService
     private var ycpConfigService: YCPConfigService
     private var ycpAccountConfig = YCPAccountConfig()
-    private var isLoading = Observable<Bool>()
+    public var isLoading = Observable<Bool>()
     
     // Consutructor to initialize YCPay
     public init(pubKey: String, locale: String = "en") {
@@ -89,9 +89,5 @@ public class YCPay {
     // set sandbox mode
     public func setSandboxMode(_ isSandboxMode: Bool) {
         self.isSandboxMode = isSandboxMode
-    }
-    
-    public func isLoaded() -> Bool {
-        return self.isLoading.property ?? false
     }
 }
