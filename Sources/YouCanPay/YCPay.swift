@@ -10,7 +10,7 @@ public class YCPay {
     private var ycpayService: YCPayService
     private var ycpConfigService: YCPConfigService
     private var ycpAccountConfig = YCPAccountConfig()
-    private var isLoaded = Observable<Bool>()
+    var isLoaded = Observable<Bool>()
     
     // Consutructor to initialize YCPay
     public init(pubKey: String, locale: String = "en") {
