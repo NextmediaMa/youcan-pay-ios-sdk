@@ -2,8 +2,8 @@ import Foundation
 
 public class Observable<T: Equatable> {
     private let thread : DispatchQueue
-    var observe : ((T) -> ())?
-    var property : T? {
+    public var observe : ((T) -> ())?
+    public var property : T? {
         willSet(newValue) {
             if let newValue = newValue {
                 thread.async {
