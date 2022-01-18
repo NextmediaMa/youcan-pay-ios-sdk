@@ -20,7 +20,7 @@ class PayEndpointTest: XCTestCase {
         var expectedTransactionId = ""
         
         // when
-        payService.post(params, true, UIViewController(), { (transactionId) in
+        payService.post("", params, UIViewController(), { (transactionId) in
             // your code
             expectedTransactionId = transactionId
             promise.fulfill()
@@ -52,7 +52,7 @@ class PayEndpointTest: XCTestCase {
         var errorMsg = ""
         
         // when
-        payService.post(params, true, UIViewController(), { (transactionId) in
+        payService.post("", params, UIViewController(), { (transactionId) in
             // your code
             promise.fulfill()
         }, { (error) in

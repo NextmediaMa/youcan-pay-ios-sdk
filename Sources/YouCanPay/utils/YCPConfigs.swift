@@ -11,9 +11,9 @@ class YCPConfigs: NSObject {
     static public let PAY_SANDBOX_URL: String = BASE_URL + "/sandbox/api/pay"
     
     // config url
-    static public let CONFIG_URL: String = BASE_URL + "/get-account-configs"
+    static public let CONFIG_URL: String = BASE_URL + "/api/get-account-configs"
     
     // cashplus url
-    static public let PAY_CASHPLUS_URL: String = BASE_URL + "/cashplus/init"
+    static public let PAY_CASHPLUS_URL: String = BASE_URL + "/api/cashplus/init"
   
 }

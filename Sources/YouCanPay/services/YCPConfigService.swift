@@ -36,7 +36,7 @@ class YCPConfigService {
                 }
                 
                 if ycpResponse.getStatusCode() != 200 {
-                    onFailure(YCPLocalizable.get("An error occurred"))
+                    onFailure(YCPLocalizable.get("\(ycpResponse.getStatusCode()) : An error occurred) "))
                     
                     return
                 }
