@@ -9,7 +9,7 @@ public class YCPay {
     public var isSandboxMode = false
     private var ycpayService: YCPayService
     private var ycpConfigService: YCPConfigService
-    private var ycpAccountConfig = YCPAccountConfig()
+    public var ycpAccountConfig = YCPAccountConfig()
     public var isLoading = Observable<Bool>()
     
     // Consutructor to initialize YCPay
