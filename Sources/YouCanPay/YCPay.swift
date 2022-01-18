@@ -10,12 +10,12 @@ public class YCPay {
     private var ycpayService: YCPayService
     private var ycpConfigService: YCPConfigService
     private var ycpAccountConfig = YCPAccountConfig()
-    var isLoaded = Observable<Bool>()
+    private var isLoading = Observable<Bool>()
     
     // Consutructor to initialize YCPay
     public init(pubKey: String, locale: String = "en") {
         self.pubKey = pubKey
-        self.isLoaded.property = false
+        self.isLoading.property = false
         YCPLocalizable.setCurrentLocale(locale: locale)
         self.ycpayService = YCPayService(httpAdapter: YCPAlamofireAdapter())
         self.ycpConfigService = YCPConfigService(httpAdapter: YCPAlamofireAdapter())
@@ -27,10 +27,10 @@ public class YCPay {
     private func getAccountConfig() {
         self.ycpConfigService.getConfig("\(YCPConfigs.CONFIG_URL)/\(self.pubKey)", { (accountConfig) in
             self.ycpAccountConfig = accountConfig
-            self.isLoaded.property = true
+            self.isLoading.property = true
         }, { (error) in
             print(error)
-            self.isLoaded.property = true
+            self.isLoading.property = true
         })
     }
    
@@ -89,5 +89,9 @@ public class YCPay {
     // set sandbox mode
     public func setSandboxMode(_ isSandboxMode: Bool) {
         self.isSandboxMode = isSandboxMode
+    }
+    
+    public func isLoaded() -> Bool {
+        return self.isLoading.property ?? false
     }
 }
