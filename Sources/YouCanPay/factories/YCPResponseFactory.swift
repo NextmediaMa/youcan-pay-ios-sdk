@@ -24,6 +24,29 @@ class YCPResponseFactory {
             return response
         }
         
+        if jsonResponse["token"].exists() {
+            let response = YCPResponseCashplus()
+            response.token = jsonResponse["token"].stringValue
+            response.transactionId = jsonResponse["transaction_id"].stringValue
+            
+            return response
+        }
+        
+        throw YCPInvalidJsonException()
+    }
+    
+    static func getConfigResponse(json: String) throws -> YCPAccountConfig {
+        let jsonResponse = JSON((json.data(using: .utf8))!)
+        
+        if jsonResponse["acceptsCashPlus"].exists() {
+            var ycpConfig = YCPAccountConfig()
+            ycpConfig.acceptsCreditCards = jsonResponse["acceptsCreditCards"] != .null ? jsonResponse["acceptsCreditCards"].boolValue : false
+            ycpConfig.acceptsCashPlus = jsonResponse["acceptsCashPlus"] != .null ? jsonResponse["acceptsCashPlus"].boolValue : false
+            ycpConfig.cashPlusTransactionEnabled = jsonResponse["cashPlusTransactionEnabled"] != .null ? jsonResponse["cashPlusTransactionEnabled"].boolValue : false
+            
+            return ycpConfig
+        }
+        
         throw YCPInvalidJsonException()
     }
 }

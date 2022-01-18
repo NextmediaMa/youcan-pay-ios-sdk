@@ -16,16 +16,14 @@ class YCPayService {
     /// - Parameter target : view for displaying the 3DS page
     /// - Parameter onSuccess : Called when the payment is succeded
     /// - Parameter onFailure: Called when the payment is failed
-    func post(_ params: [String: Any],
-              _ isSandboxMode: Bool,
+    func post(_ endpoint: String,
+              _ params: [String: Any],
               _ target: UIViewController?,
               _ onSuccess: @escaping (String) -> Void,
               _ onFailure: @escaping (String) -> Void)
     {
         DispatchQueue.main.async(execute: { () -> Void in
-            let payUrl = isSandboxMode ? YCPConfigs.PAY_SANDBOX_URL : YCPConfigs.PAY_URL
-            
-            self.ycpHttpAdapter.post(payUrl, params, nil, { (ycpResponse) in
+            self.ycpHttpAdapter.post(endpoint, params, nil, { (ycpResponse) in
                 if !ycpResponse.isSuccess() {
                     onFailure(ycpResponse.getResponse() ?? YCPLocalizable.get("An error occurred while processing the payment."))
                     
@@ -62,6 +60,13 @@ class YCPayService {
                     //Response when payment is protected by 3DSecure
                     if response is YCPResponse3ds {
                         self.handleResult((response as! YCPResponse3ds), target, onSuccess, onFailure)
+                        
+                        return
+                    }
+                    
+                    // cashplus response
+                    if response is YCPResponseCashplus {
+                        onSuccess((response as! YCPResponseCashplus).token)
                         
                         return
                     }
