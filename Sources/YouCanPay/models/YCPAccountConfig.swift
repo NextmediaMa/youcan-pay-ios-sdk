@@ -1,9 +1,9 @@
 import Foundation
 
 public struct YCPAccountConfig {
-    var acceptsCreditCards: Bool = false
-    var acceptsCashPlus: Bool = false
-    var cashPlusTransactionEnabled: Bool = false
+    public var acceptsCreditCards: Bool = false
+    public var acceptsCashPlus: Bool = false
+    public var cashPlusTransactionEnabled: Bool = false
     
     init() {
     }
