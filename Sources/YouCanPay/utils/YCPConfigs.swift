@@ -2,7 +2,7 @@ import Foundation
 
 class YCPConfigs: NSObject {
     // root url
-    static public let BASE_URL: String = "https://pay.youcan.shop"
+    static public let BASE_URL: String = "https://youcanpay.com"
     
     // pay url
     static public let PAY_URL: String = BASE_URL + "/api/pay"
