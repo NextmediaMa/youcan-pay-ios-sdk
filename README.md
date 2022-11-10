@@ -146,4 +146,4 @@ YouCan Pay [Sandbox](https://pay.youcan.shop/docs#sandbox) offers an easy way fo
 ycPay.setSandboxMode(false)
 ```
 
-Happy coding :slightly_smiling_face:
+Happy coding 🎉
