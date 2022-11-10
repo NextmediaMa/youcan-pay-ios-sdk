@@ -17,7 +17,7 @@ integration requires endpoints on your server that talk to the YouCanPay API. Us
 
 ### Install the YouCan Pay SDK :
 
-## Swift Package Manager
+### Swift Package Manager
 The Swift Package Manager is a tool for automating the distribution of Swift code and is integrated into the swift compiler.
 
 Once you have your Swift package set up, adding YouCanPay SDK as a dependency is as easy as adding it to the dependencies value of your Package.swift.
@@ -34,7 +34,7 @@ dependencies: [
 import YouCanPay
 
 /// Initialize YouCanPay SDK
-/// - Parameter locale: <#is an optional parameter it can accept (en, ar, fr) to recieve messages with the localization provided it the initialization#>
+/// - Parameter locale: is an optional parameter it can accept (en, ar, fr) to recieve messages with the localization provided it the initialization
 let ycPay = YCPay(pubKey: "YOUR PUB KEY", locale: “en”)  
  ```
  
