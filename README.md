@@ -7,67 +7,143 @@ YouCanPay iOS SDK makes it quick and easy to build an excellent payment experien
 
 The YouCanPay iOS SDK requires Xcode 11 or later and is compatible with apps targeting iOS 10 or above. We support Catalyst on macOS 10.12 or later.
 
-## Basic Usage :
+## Basic Usage
 
-####  Server-side 
+###  Server-side 
 
-This integration requires endpoints on your server that talk to the YouCanPay API. Use our official libraries for access to the YouCanPay API from your server:  the following steps in our [Documentation](https://pay.youcan.shop/docs) will guide you through.
 
-#### Installation 
 
-- Swift Package Manager 
-```bash
+integration requires endpoints on your server that talk to the YouCanPay API. Use our official libraries for access to the YouCanPay API from your server:  the following steps in our [Documentation](https://pay.youcan.shop/docs) will guide you through.
+
+### Install the YouCan Pay SDK :
+
+##Swift Package Manager
+The Swift Package Manager is a tool for automating the distribution of Swift code and is integrated into the swift compiler.
+
+Once you have your Swift package set up, adding YouCanPay SDK as a dependency is as easy as adding it to the dependencies value of your Package.swift.
+
 dependencies: [
-    .package(url: "https://github.com/NextmediaMa/youcan-pay-ios-sdk", .upToNextMajor(from: "0.0.1"))
+    .package(url: "https://github.com/NextmediaMa/ycpayment-ios-sdk.git")
 ]
+
+### Set up Payment :
+
+ #### Initials YCPay
+ The first step is to initialize YouCanPay SDK by creating an instance using the following parameters : ```pub_key``` and ```locale``` as localizable the default language is en 
+```swift
+import YouCanPay
+
+/// Initialize YouCanPay SDK
+/// - Parameter locale: <#is an optional parameter it can accept (en, ar, fr) to recieve messages with the localization provided it the initialization#>
+let ycPay = YCPay(pubKey: "YOUR PUB KEY", locale: “en”)  
+ ```
+ 
+##### pub_key 
+The seller's YouCanPay account public key. This lets us know who is receiving the payment.
+
+#### Load supported payment methods
+ After we initials ```ycPay``` we can load the supprted payment methods using: 
+ ```swift
+ import YouCanPay
+ 
+    ycPay.isLoading.observe = { isLoaded in      
+      if ycPay.ycpAccountConfig.acceptsCreditCards {
+        // Credit cards payment method is available
+      }
+      
+      if ycPay.ycpAccountConfig.acceptsCashPlus {
+        // CashPlus is available
+      }
+    }
 ```
+
+### Start Payment Using Credit Card:
+When you get ``` ycPay.ycpAccountConfig.acceptsCreditCards == true``` it means that Credit Card payment methodis allowed.
+
+#### Initials Card Informtaion
+```swift
+let cardInfo = YCPCardInformation(cardHolderName: "NAME", cardNumber: "XXXXXXXXXXXXXXXX", expiryDate: "XX/XX", cvv: "XXX")
+ ```
+ 
+#### Proceed payment using Credit Card:
+You can use ```ycPay.payWithCreditCard```  to proceed your payment use as parametrs the ```token_id``` it can be generated from your server side and received through an endpoint to the mobile application, to generate a token please refer to the [Tokenization section](https://youcanpay.com/docs#tokenization).
+```swift
+import YouCanPay
+
+private func pay() {
+    do{
+      // start loader
+      
+      // initialize 
+      let cardInfo = YCPCardInformation(cardHolderName: "NAME", cardNumber: "XXXXXXXXXXXXXXXX", expiryDate: "XX/XX", cvv: "XXX")
+       
+      try self.ycPay.payWithCreditCard("token_id",
+                       cardInfo!,
+                       self,
+                       successCallback,
+                       errorCallback)
+    }catch{
+      // show error
+      // stop loader
+    }
+  }
+   
+   // onSuccess callback
+  func successCallback(transactionId: String) {
+    // a transaction id is retrieved  
+    // stop loader
+  }
+   
+   // onFailure callback
+  func errorCallback(errorMessage: String) {
+    // a error message is retrieved 
+    // stop loader
+  }
+```
+Once the onSuccess callback invoked it means that the transaction is processeded successfully, a transaction ID will be recieved as a parameter that you can submit with your order details. Similarly, onFailure is called when an error is occurred during the payment, and you get the error message as a parameter to show to customer.
+
+### Start Payment Using CashPlus:
+If you you get ```ycPay.ycpAccountConfig.acceptsCashPlus == true``` that's mean that you have CashPlus as a payment method
+
+
+#### Proceed payment using CashPlus:
+You can use ```ycPay.payWithCashPlus``` to proceed your payment use as parametrs the ```token_id``` it can be generated from your server side and received through an endpoint to the mobile application, to generate a token please refer to the [Tokenization section](https://youcanpay.com/docs#tokenization).
 
 ```swift
 import YouCanPay
 
-class ViewController: UIViewController {
-    var ycPay: YCPay?
-
-    // called to initialize your payment
-    func initializePayment() {
-        // call your tokenizer endpoint to get token and your pubkey
-        
-        // initialize YouCan Pay
-        self.ycPay = YCPay(pubKey: "YOUR PUBKEY")
-
-        // setting the sandbox mode
-        self.ycPay?.setSandboxMode(true)
+private func pay() {
+    do{
+      // start loader
+      
+      try self.ycPay.payWithCashPlus("token_id",
+                       successCallback,
+                       errorCallback)
+    }catch{
+      // show error
+      // stop loader
     }
-    
-    // start the payment
-    func pay() {
-        do {
-            // set your card information
-            cardInfo = YCPCardInformation(cardHolderName: "NAME", cardNumber: "XXXXXXXXXXXXXXXX", expiryDate: "XX/XX", cvv: "XXX")
-            
-            // call pay
-            try self.ycPay?.pay("YOUR TOKEN",
-                                cardInfo!,
-                                self,
-                                successCallback,
-                                errorCallback)
-        } catch {
-            print("error: \(error)")
-        }
-    }
-    
-    func successCallback(transactionId: String) {
-        // your code here
-    }
-    
-    func errorCallback(errorMessage: String) {
-        // your code here
-    }
-}
+  }
+   
+   // onSuccess callback
+  func successCallback(transactionId: String) {
+    // a transaction id is retrieved  
+    // stop loader
+  }
+   
+   // onFailure callback
+  func errorCallback(errorMessage: String) {
+    // a error message is retrieved 
+    // stop loader
+  }
 ```
 
-## Example :
+### Sandbox
+YouCan Pay [Sandbox](https://pay.youcan.shop/docs#sandbox) offers an easy way for developers to test YouCan Pay in their test environment.
 
-Here's a [Sample](https://github.com/NextmediaMa/youcan-pay-ios-integration-example) showing how to implement YouCan Pay ios sdk.
+```swift
+// setting the sandbox mode
+ycPay.setSandboxMode(false)
+```
 
 Happy coding :slightly_smiling_face:
