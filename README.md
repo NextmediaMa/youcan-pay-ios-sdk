@@ -46,15 +46,15 @@ The seller's YouCanPay account public key. This lets us know who is receiving th
  ```swift
  import YouCanPay
  
-    ycPay.isLoading.observe = { isLoaded in      
-      if ycPay.ycpAccountConfig.acceptsCreditCards {
-        // Credit cards payment method is available
-      }
-      
-      if ycPay.ycpAccountConfig.acceptsCashPlus {
-        // CashPlus is available
-      }
-    }
+ycPay.isLoading.observe = { isLoaded in      
+  if ycPay.ycpAccountConfig.acceptsCreditCards {
+    // Credit cards payment method is available
+  }
+
+  if ycPay.ycpAccountConfig.acceptsCashPlus {
+    // CashPlus is available
+  }
+}
 ```
 
 ### Start Payment Using Credit Card:
