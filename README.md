@@ -23,7 +23,7 @@ The Swift Package Manager is a tool for automating the distribution of Swift cod
 Once you have your Swift package set up, adding YouCanPay SDK as a dependency is as easy as adding it to the dependencies value of your Package.swift.
 
 dependencies: [
-    .package(url: "https://github.com/NextmediaMa/ycpayment-ios-sdk.git")
+    .package(url: "https://github.com/youcan-shop/youcan-pay-ios-sdk.git")
 ]
 
 ### Set up Payment :
